@@ -1,0 +1,112 @@
+    <img src="images/top.png" />
+      <div id="mid_corp">
+        <div id="text_corp">
+          <span class="cambria orange italic size25">Boutique</span>
+      <br /><br /><div id="item_tooltip_top"></div>
+          <div id="item_tooltip_middle">
+          <table width="100%" border="0">
+            <tr>
+              <td>
+                <div style="text-align: center;">
+                <a href="?page=shop&category=coiffe#corp">
+                <span style="font-size:14px; color:#e87505;">Coiffes</span>
+                <br />
+                <img src="images/shop/coiffes.png" />
+                </a>
+                </div>
+              </td>
+              <td>
+                <div style="text-align: center;">
+                <a href="?page=shop&category=cape#corp">
+                <span style="font-size:14px; color:#e87505;">Capes</span>
+                <br />
+                <img src="images/shop/capes.png" />
+                </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="text-align: center;">
+                <a href="?page=shop&category=amulette#corp">
+                <span style="font-size:14px; color:#e87505;">Amulettes</span>
+                <br />
+                <img src="images/shop/amulettes.png" />
+                </a>
+                </div>
+              </td>
+              <td>
+                <div style="text-align: center;">
+                <a href="?page=shop&category=anneau#corp">
+                <span style="font-size:14px; color:#e87505;">Anneaux</span>
+                <br />
+                <img src="images/shop/anneaux.png" />
+                </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="text-align: center;">
+                <a href="?page=shop&category=ceinture#corp">
+                <span style="font-size:14px; color:#e87505;">Ceintures</span>
+                <br />
+                <img src="images/shop/ceintures.png" />
+                </a>
+                </div>
+              </td>
+              <td>
+                <div style="text-align: center;">
+                <a href="?page=shop&category=botte#corp">
+                <span style="font-size:14px; color:#e87505;">Bottes</span>
+                <br />
+                <img src="images/shop/bottes.png" />
+                </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="text-align: center;">
+                <a href="?page=shop&category=bouclier#corp">
+                <span style="font-size:14px; color:#e87505;">Boucliers</span>
+                <br />
+                <img src="images/shop/boucliers.png" />
+                </a>
+                </div>
+              </td>
+              <td>
+                <div style="text-align: center;">
+                <a href="?page=shop&category=arme#corp">
+                <span style="font-size:14px; color:#e87505;">Armes</span>
+                <br />
+                <img src="images/shop/armes.png" />
+                </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="text-align: center;">
+                <a href="?page=shop&category=familier#corp">
+                <span style="font-size:14px; color:#e87505;">Familiers</span>
+                <br />
+                <img src="images/shop/familiers.png" />
+                </a>
+                </div>
+              </td>
+              <td>
+                <div style="text-align: center;">
+                <a href="?page=shop&category=diver#corp">
+                <span style="font-size:14px; color:#e87505;">Divers</span>
+                <br />
+                <img src="images/shop/divers.png" />
+                </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+          </div>
+          <div id="item_tooltip_bottom"></div>        </div>
+      </div>
+    <img src="images/bottom.png" /><input type="hidden" value="MTI3LjAuMC4x" />

@@ -1,0 +1,131 @@
+    <img src="images/top.png" />
+      <div id="mid_corp">
+        <div id="text_corp">
+          <span class="cambria orange italic size25">Charte du serveur</span>
+          <br /><br />
+          <b><font color="red">En vous inscrivant et en jouant sur Bustofus, vous déclarez avoir lu et accepté la présente charte. Il vous est donc impossible
+          de contester une sanction sous prétexte que vous ne l'avez pas lu, si les raisons de cette sanction sont inscrites ci dessous.</font></b>
+          <br /><br />
+          <img src="images/livre.png" style="float: right;" />
+          Dernière mise a jour le : 16/03/11<br />
+          La charte pourra être modifiée à tout instant selon l'évolution des évènements au sein de notre communauté.<br />
+          Ainsi nous considérons que <b><u>tout joueur est censé se tenir au courant des règles de Bustofus et accepte de les respeceter.</u></b><br />
+          Vous êtes donc priés de la consulter régulièrement.
+          <br /><br />
+          <b><u><span style="font-size: 12px"><font color="lightblue">POINTS GLOBAUX</font></span></u></b>
+          <ul>
+            <li>Les membres de l'équipe sont des personnes bénévoles qui travaillent par envie pour le serveur, il est évident que vous leur devez le respect comme toute autre personne.</li>
+            <br />
+            <li>Toute marque d'impolitesse ou d'irrespect envers un des membres de l'équipe et/ou le serveur est <font color="red">sanctionnée</font>.</li>
+            <br />
+            <li>Toutes question destinée à un membre de l'équipe <b>sera correctement formulée ou ne trouvera pas de réponse</b>.</li>
+            <br />
+            <li>Il est <font color="red">interdit</font> de contacter les MJ inutilement pour leur demander une téléportation, des kamas, de l'équipement etc.</li>
+            <br />
+            <li>Les pseudonymes des personnages joueurs des membres de l'équipe sont confidentiels. Il est <font color="red">interdit</font> de les contacter sous ces pseudonymes ou de les divulguer.</li>
+          </ul>
+          <br />
+          <font color="orange">Qui contacter et comment ?</font>
+          <br /><br />
+          Avant de poster une requête sur le support, n'hésitez pas à demander de l'aide ou des renseignements auprès des autres joueurs, ainsi que sur le forum.
+          Si malgré ceci, vous ne trouvez pas de réponse, vous pouvez contacter un membre de l'équipe via le <a href="?pagina=support">support technique</a>, sans en abuser.<br />
+          Prenez bien soin d'être le plus clair possible dans votre requête. Si la requête est illisible, incompréhensible ou qu'elle concerne une question traitée de nombreuse fois
+          sur le forum, <b>un MJ a parfaitement le droit de la supprimer sans la traiter</b>. Il en va de même pour les demandes qui ne se font pas par requête, tels que les rapports de bogues
+          (à faire sur notre bugtracker), les demandes de sanctions ou les réclamations de sanctions (à faire sur le forum, dans les sections réservées a cela).<br />
+          <br /><br />
+          <font color="orange">Transactions :</font>
+          <br /><br />
+          <ul>
+            <li>Les échanges de comptes ne sont <b>pas cautionnés et déconseillés</b>. En cas d'arnaque vous en êtes le seul responsable, <b>en aucun cas l'équipe n'interviendra pour restituer le compte</b>.</li>
+            <br />
+            <li>La vente de compte ou items, kamas, etc... <b>contre des Starpass</b> est <font color="red">strictement interdite</font>, ainsi que toute autre transaction concernant les Starpass. Ceux ci ne sont ni revendables, ni échangeables.</li>
+            <br />
+            <li>Les transactions des comptes ou objets fictifs du jeu (items, kamas, etc...) <b>contre de l'argent réel</b> sont <font color="red">strictement interdites</font>.</li>
+          </ul>
+          <br />
+          <font color="orange">Pseudonymes :</font>
+          <br /><br />
+          <ul>
+            <li>Si vous avez un doute sur la conformité de votre pseudo il est préférable de le changer ou demander a un membre du staff ce qu'il en pense.</li>
+            <br />
+            <li>Tout pseudo en rapport avec la liste suivante est fortement déconseillé voir interdit, en cas de non respect de cette règle, nous nous réservons le droit de le modifier sans préavis :<br />
+            &nbsp;&nbsp;- Se rapprochant de celui d'un membre de l'équipe du serveur.<br />
+            &nbsp;&nbsp;- Susceptible de choquer les joueurs (tels que, sans s'y limiter, en rapport avec la vulgarité, tout caractère obscène, violent, à connotation sexuelle)<br />
+            &nbsp;&nbsp;- Racisme / Ethnie<br />
+            &nbsp;&nbsp;- Harcèlement ou diffamation<br />
+            &nbsp;&nbsp;- Religions ou figure religieuse<br />
+            &nbsp;&nbsp;- Politique ou figure politique<br />
+            &nbsp;&nbsp;- Publicité</li>
+            <br />
+            <li>Toute <b>publicité</b> pour un autre serveur ou leur mention (pour faire l'éloge ou la diatribe) est <font color="red">interdite</font>. Dans le cas contraire vous risquez une suspension définitive de vôtre compte. Nous sommes sur Bustofus, les autres serveurs ne nous concernent pas.</li>
+          </ul>
+          <br />
+          <b><u><span style="font-size: 12px"><font color="lightblue">COMPORTEMENT EN JEU</font></span></u></b>
+          <ul>
+            <li>Il est <font color="red">interdit</font> <b>d'envoyer des messages privés à un MJ</b>, attendez que ce dernier vous contacte pour lui répondre.</li>
+            <br />
+            <li>Les maîtres de jeu ne <b>valident pas les quêtes non fonctionnelles</b>, sauf  à titre exceptionnel. Les rapports de bogues sont à faire sur le bugtracker.</li>
+          </ul>
+          <br />
+          <font color="orange">Charte en jeu :</font>
+          <br /><br />
+          <ul>
+            <li>Toute utilisation de logiciels tiers est <font color="red">interdite</font> et <font color="red">sanctionnée par une suspension définitive du compte</font> sans possibilité de revenir sur cette sanction, ainsi que tout acte de complicité de triche.</li>
+            <br />
+            <li>Tout abus de bogue est <font color="red">sanctionné</font>. Tout équipement ou objet récupéré grâce à ce genre d'abus, <b>se verra immédiatement supprimé et le joueur sera sanctionné</b>.</li>
+            <br />
+            <li>La mendicité reste tolérée si celle-ci est discrète et sans harcèlement.</li>
+            <br />
+            <li>Le multi-compte (Utilisation de plusieurs comptes en même temps par une même personne) est <b>toléré</b> à condition qu'il ne soit pas utilisé à des fins malhonnêtes (Tel que, sans s'y limiter, provocation de l'alignement opposé, utilisation des deux comptes en même temps pour s'aider).</li>
+            <br />
+            <li>Le multi-boxing est <font color="red">interdit</font> au même titre que le multi-compte, il pourra être sanctionné de la même manière.</li>
+          </ul>
+          <br />
+          <font color="orange">Guildes :</font>
+          <br /><br />
+          <ul>
+            <li>Les guildes appartiennent à leur créateur, seul celui-ci peut décider de la passation de la guilde à un autre membre. Les MJ <b>n'interviendront donc pas en cas d'abandon</b> par le meneur de guilde (sauf en cas de suspension définitive du compte) et les investissements (maisons, enclos, ...) <b>ne seront pas rendus</b>.</li>
+            <br />
+            <li>Les meneurs de guilde sont entièrement responsables de leur guilde, ainsi ils ont la responsabilité de contrôler ce qui se passe au sein de leur guilde. Si l'une d'elle se révèle être le refuge d'actes allant à l'encontre de cette charte, <b>elle se verra dissoute sans préavis et les membres se verront lourdement sanctionnés</b>.</li>
+          </ul>
+          <br />
+          <font color="orange">Cannaux de discussions :</font>
+          <br /><br />
+          <ul>
+            <li>Tout langage autre que le français sur les canaux publiques (général, recrutement, commerce ...) est <font color="red">interdit</font>.</li>
+            <br />
+            <li>Toute exploitation abusive d'un canal de discutions publique (tel que, sans s'y limiter, insulte, diffamation ou flood) est <font color="red">interdite</font>.</li>
+            <br />
+            <li>Les messages entièrement en majuscules sur un canal de discussions sont peu recommandés car symbolisant la colère. A l'exception d'un usage Rp, ceux-là ne seront pas tolérés.</li>
+            <br />
+            <li>Chaque joueur mérite le respect sur le serveur. Ainsi, les <b>injures</b> envers un joueur sont <font color="red">interdites</font>. Les insultes graves (tel que, sans s'y limiter, le racisme, l'homophobie) sont <b>sanctionnées plus lourdement</b>.</li>
+            <br />
+            <li>Un MJ sait ce qu'il a à faire. Les joueurs n'ont pas à leur dicter quoi que ce soit. Les refléxions tels que "MJ go support" lorsqu'un MJ fait son apparition en public ne sont donc pas tolérées.</li>
+            <br />
+            <li><font color="red">Les messages demandant l'aide d'un MJ sur les canaux publics ainsi que les messages privés envoyés à répétition à un MJ sont interdits</font>. Il est donc fortement déconseillé de flooder le canal lorsqu'un membre de l'équipe y fait son apparition.</li>
+            <br />
+            <li>Est considéré comme flood, un message lancé plus de deux fois par minutes sur un canal public. Est également considéré comme tel la relance d'un MJ sur un canal de discussions ou en message privé ainsi que toute utilisation de macro de dessins.</li>
+          </ul>
+          <br />
+          <b><u><span style="font-size: 12px"><font color="lightblue">SANCTIONS</font></span></u></b>
+          <ul>
+            <li>Chacun est <b>entièrement responsable de son compte</b>. En cas de sanction de celui ci, toutes explications telle que "ce n'est pas moi mais un autre" ne permettront pas de la lever.</li>
+            <br />
+            <li>Comme explicité plus haut, <b>les starpass ne sont ni échangeables, ni remboursable</b>, même après sanction du compte.</li>
+            <br />
+            <li>Toute sanction en jeu <b>peut être répercutée sur le forum</b> et inversement.</li>
+            <br />
+            <li>Les sanction encourues varient en fonction de la gravité de l'acte et de la récidive.</li>
+            <br />
+            <li>Les supsensions définitives s'appliquent <b>également à l'adresse IP</b>.</li>
+            <br />
+            <li>Les preuves (tel que les screenshots) falsifiées engenderont <b>une suspension définitive (forum + jeu) du compte</b> ayant déposé la plainte.</li>
+            <br />
+            <li>Tout comportement contraire à l'éthique de Bustofus pourra être sanctionnée par l'équipe sans avertissement préalable.</li>
+          </ul>
+          <br />
+          <br /><br /><br />
+          <span style="color: lightgreen"><b>En cas de fraude très nettement volontaire avec une suppression ou rename du personnage en question pour ne pas se faire repérer, nous nous réservons le droit de modifier la sanction afin que celle ci soit nettement plus lourde.</b></span>
+        </div>
+      </div>
+      <img src="images/bottom.png" />

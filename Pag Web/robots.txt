@@ -1,0 +1,11 @@
+User-Agent: *
+Disallow: /PSD/
+Disallow: /admin/
+Disallow: /build/
+Disallow: /cache/
+Disallow: /config/
+Disallow: /images/
+Disallow: /markitup/
+Disallow: /pages/
+Disallow: /script/
+Disallow: /style/

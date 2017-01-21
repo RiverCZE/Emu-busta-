@@ -1,0 +1,306 @@
+
+
+/*
+
+# SITE : Nestrya (c) 2o11 ;
+# NOM : style_class ;
+# FONCTION : Design global css ;
+# AUTEUR : Nicow � 100% ;
+# Tout droits r�serv�s ;
+# Merci de respecter les r�alisations des l'auteurs du site ;
+# Copyright (c) 2o11
+
+*/
+
+
+/****CLASS****/
+
+.form{
+	height: 15px;
+	background-color: #24190d;
+	border: 1px solid #000000;
+	color: #665544;
+	font-family: Verdana;
+	font-size: 10px;
+	text-shadow: 0em 0em 0.2em #000;
+}
+
+.form{
+	width: 140px;
+}
+
+.infos_compte a{
+	color: #665544;
+	font-family: Verdana;
+	font-size: 10px;
+	margin-top: 5px;
+	text-shadow: 0em 0em 0.2em #000;
+	text-decoration: none;
+}
+
+.infos_compte a:hover{
+	color: #513d29;
+	text-shadow: 0em 0em 0.2em #513d29;
+	text-decoration: none
+}
+
+.connexion, .compte{
+	float: left;
+	margin-top: 45px;
+	margin-left: 25px;
+}
+
+.connexion{
+  margin-top: 80px;
+}
+.compte table{
+	background-color: #4c351f;
+  width: 285px;
+}
+
+.compte td{
+  width: 142px;
+	background-color: #251a0f;
+}
+
+.compte td:hover{
+  width: 142px;
+	background-color: #241d17;
+}
+
+
+.barre{
+	color: #706359;
+	font-size: 14px;
+	font-family: Verdana;
+	width: 889px;
+	margin-top: 269px;
+	margin-left: 44px;
+	text-shadow: 0em 0em 0.2em #000;
+}
+
+.menu_top{	
+	width: 580px;
+	color: #665544;
+	font-size: 15px;
+	font-family: Verdana;
+	margin-bottom: 5px;
+	margin-left: 20px;
+	text-shadow: 0em 0em 0.2em #000;
+	text-align: center;
+}
+
+.menu_top a{	
+	color: #665544;
+	font-size: 15px;
+	font-family: Verdana;
+	text-shadow: 0em 0em 0.2em #000;
+	text-align: center;
+	text-decoration: none;
+}
+
+.menu_top a:hover{	
+	text-shadow: 0em 0em 0.2em #665544;
+}
+
+.titre{	
+	color: #6f3b1c;
+	font-size: 18px;
+	font-family: Verdana;
+	margin-bottom: 5px;
+	margin-left: 20px;
+	text-shadow: 0em 0em 0.2em #000;
+}
+
+.date{	
+	color: #6f3b1c;
+	font-size: 12px;
+	font-family: Verdana;
+	text-shadow: 0em 0em 0.2em #000;
+	margin-left: 5px;
+	margin-top: 10px;
+}
+
+.suite{	
+	text-align: right;
+	color: #6f3b1c;
+	font-size: 12px;
+	font-family: Verdana;
+	text-shadow: 0em 0em 0.2em #000;
+	margin-right: 10px;
+	margin-top: -15px;
+}
+
+.avatar{
+	float: right;
+}
+
+.footer_right{
+	float: right;
+	text-align: right;
+}
+
+.footer_left{
+	position: absolute;
+	text-align: left;
+}	
+
+.stats_serveur_1{
+	position: absolute;
+	margin-top: 42px;
+	margin-left: 165px;
+	color: #ffffff;
+	font-family: Verdana;
+	font-size: 15px;
+	text-shadow: 0em 0em 0.2em #000;
+	width: 180px;
+	height: 70px;
+}
+
+.stats_serveur_2{
+	position: absolute;
+	margin-top: 42px;
+	margin-left: 473px;
+	color: #ffffff;
+	font-family: Verdana;
+	font-size: 15px;
+	text-shadow: 0em 0em 0.2em #000;
+	width: 180px;
+	height: 70px;
+}
+
+.stats_serveur_3{
+	position: absolute;
+	margin-top: 42px;
+	margin-left: 788px;
+	color: #ffffff;
+	font-family: Verdana;
+	font-size: 15px;
+	text-shadow: 0em 0em 0.2em #000;
+	width: 180px;
+	height: 70px;
+}
+
+fieldset.error{
+  border: 2px solid #c60808;
+  margin: 5px 0;
+  color: #c60808;
+  background: #f4b3b3;
+  background-image: url('../images/exclamation.png');
+  background-repeat: no-repeat;
+  background-position: 5px;
+}
+
+fieldset.succes{
+  border: 2px solid #22a309;
+  margin: 5px 0;
+  color: #22a309;
+  background: #c8f4b3;
+  background-image: url('../images/accept.png');
+  background-repeat: no-repeat;
+  background-position: 5px;
+}
+
+fieldset.infos{
+  border: 2px solid #368dfe;
+  margin: 5px 0;
+  color: #368dfe;
+  background: #add0fe;
+  background-image: url('../images/information.png');
+  background-repeat: no-repeat;
+  background-position: 5px;
+}
+
+.profil_menu_left{
+  float: left;
+  margin-left: 30px
+}
+
+.profil_menu_right{
+  float: right;
+  margin-right: 30px
+}
+
+.midBlockPanier{
+	background-image: url("../images/midBlockPanier.png");
+	background-repeat: repeat-y;
+	background-color: transparent;
+  color: #665544;
+	font-family: Verdana;
+	font-size: 10px;
+	text-shadow: 0em 0em 0.2em #000
+}
+
+.midBlockPanier table{
+	background-color: #4c351f;
+  width: 285px;
+}
+
+.midBlockPanier td{
+  width: 142px;
+	background-color: #251a0f;
+}
+
+.midBlockPanier td:hover{
+  width: 142px;
+	background-color: #241d17;
+}
+
+.panier{
+  color: #665544;
+	font-family: Verdana;
+	font-size: 10px;
+	text-shadow: 0em 0em 0.2em #000
+}
+
+.panier table{
+	background-color: #4c351f;
+}
+
+.panier td{
+	background-color: #251a0f;
+}
+
+.panier td:hover{
+	background-color: #241d17;
+}
+
+.Ladder1{
+	background-color: #c49600;
+	color: black;
+}
+
+.Ladder2{
+	background-color: #aba9aa;
+	color: black;
+}
+
+.Ladder3{
+	background-color: #a3532e;
+	color: black;
+}
+
+.tooltip
+{
+  display:none;
+  background:url(../images/white_big.png);
+  height:140px;
+  padding:40px 30px 10px 30px;
+  width:310px;
+  font-size:11px;
+  color:#363636;
+}
+
+.tooltip a
+{
+  color:#ad4;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.tooltip a:hover
+{
+  color:#ad4;
+  font-size:11px;
+  font-weight:bold;
+}

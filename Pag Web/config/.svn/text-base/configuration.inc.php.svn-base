@@ -1,0 +1,61 @@
+<?php
+define( 'PAGES_FOLDER', 'pages/' );
+define( 'PHP', strrchr( __FILE__, '.' ) );
+define( 'VERSION', '0.203.3596' ); // Useless :D
+define( 'PAGE', '?page=' );
+define ("EMOTICONS_DIR", "images/emoticons/"); // BBCode
+
+ini_set('date.timezone', 'Europe/Paris');
+
+require_once( 'msg_list' . PHP );
+require_once( 'systeme.class' . PHP );
+require_once( 'bbcode.class' . PHP );
+
+$sys = new SystemClass;
+$bbcode = new BBCodeClass;
+
+/* Configuration */
+
+$sys->dbHost = '127.0.0.1'; // Host
+$sys->dbName = 'nestrya_realm'; // Database // nestrya_other
+$sys->dbUser = 'root'; // User
+$sys->dbPass = ''; // Password
+
+$sys->database(); // Etablir le connexion a la base de données
+$sys->infos(); // Etablir les informations compte en cache
+$sys->auto(); // Système d'auto reconnexion
+
+$sql = $sys->dbOther->query("SELECT * FROM config");
+$data = $sql->fetch(PDO::FETCH_ASSOC);
+
+$sys->website = $_SERVER['HTTP_HOST']; // DON'T TOUCH
+
+$idp = 15104; // DON'T TOUCH
+$idd = 32002; // DON'T TOUCH
+
+$sys->points = $data['points']; // Nombre de points/achat
+$sys->points_vip = $data['points_vip']; // Ajout pour les VIPs
+$sys->points_vote = $data['points_vote']; // Nombre de points/vote
+$sys->vote_link = $data['rpg_link']; // Lien de vote
+
+$sys->beta = $data['beta']; // Mode Beta
+
+$sys->ladder_blacklist = array('ShadowakShawn','Kaiz','Davdav','Moka','Oxyh','Lyiro'); // Liste des personnages a ne pas afficher dans le ladder
+$sys->supreme_right = array('Sorrow','thediminou','aly'); // Accès droit suprême
+
+$sys->register = $data['register']; // Inscription
+
+$title = 'Nestrya'; // DON'T TOUCH
+
+$cache = array('home','ladder','article'); // Liste des pages a mettre en cache
+
+/* Script de mise en cache */
+
+$in = array('/nestrya','?'); // DON'T TOUCH // $in = array('/','?');
+$out = array('cache',''); // DON'T TOUCH // $out = array('cache/','');
+$expire = time()-3600; // Bail d'expiration en seconde (1h)
+$page_cache = str_replace($in,$out,$_SERVER['REQUEST_URI'].'.html'); // DON'T TOUCH
+
+$construct = $data['construct']; // Mode Construction
+$maintenance = $data['maintenance']; // Mode Maintenance
+

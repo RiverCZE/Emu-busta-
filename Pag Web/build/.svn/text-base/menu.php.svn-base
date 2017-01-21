@@ -1,0 +1,70 @@
+    <div id="menu_gauche">
+      <a href="?page=vote" target="_blank"><img src="images/block_1.png" /></a>
+      <?php if(isset($_SESSION['guid']) && $_SESSION['guid'] != ''){ ?>
+      <div id="block_compte">
+        <div class="compte">
+          <table>
+          <tr>
+          <td><span class="infos_compte"><a href="?page=account">Mon Profil</a></span></td>
+          <td><span class="infos_compte"><a href="?page=points">Mes Points (<?php echo $_SESSION['points']; ?>)</a></span></td>
+          </tr>
+          <tr>
+          <td><span class="infos_compte"><a href="?page=shop#corp">Accéder à la Boutique</a></span></td>
+          <td><span class="infos_compte"><a href="?page=panier&action=historique#corp">Historique achats</a></span></td>
+          </tr>
+          <tr>
+          <td><span class="infos_compte"><a href="?page=contact">Nous Contacter</a></span></td>
+          <td><span class="infos_compte"><a href="?page=support">Support Technique</a></span></td>
+          </tr>
+          <tr>
+          <td><span class="infos_compte"><a href="?page=chat">Accéder au Chat</a></span></td>
+          <td><span class="infos_compte"><a href="?page=disconnect">Déconnexion</a></span></td>
+          </tr>
+          </table>
+        </div>
+      </div>
+
+      <?php $sys->menu_panier(); ?>
+
+      <?php }else{ ?>
+      <div id="block_connexion">
+        <img src="images/clef.png" style="margin-top:35px;margin-left:-230px;position:absolute;"/>
+        <div style="margin-top:23px; margin-left:150px;position:absolute;">
+          <br /><a href="?page=register"><span style="font-size:8px;">>></span> Pas encore inscrit ?</a>
+          <br /><a href="?page=lost_password"><span style="font-size:8px;">>></span> Mot de passe oublié ?</a>
+        </div>
+        <span style="text-shadow:0em 0em 0.2em #000;margin-bottom:10px;margin-left:70px;margin-top:59px;float:left;">
+          ___________________________
+        </span>
+        <div style="margin-left: 25px;">
+          <form method="post" action="?page=login">
+            <input class="form" type="text" name="account" value=""/> <input class="form" type="password" name="password" value=""/>
+            <span style="text-shadow:0em 0em 0.2em #000;font-size:9px;height:13px;margin-left:-3px;margin-top:3px;margin-bottom:0px;float:left;">
+              <input type="checkbox" value="1" name="auto" class="checkbox-style" />Connexion automatique
+            </span>
+            <input class="form" style="margin-left:147px;margin-top:-10px;margin-bottom:5px;" type="submit" name="send" value="Connexion"/>
+          </form>
+        </div>
+      </div>
+      <?php }if(empty($_SESSION['guid'])){ ?>
+      <a href="?page=register"><img style="margin-top: 10px;" src="images/block_inscription.png" /></a>
+      <?php }else{ ?>
+      <a href="?page=join"><img style="margin-top: 10px;" src="images/join.png" /></a>
+      <?php } ?>
+    </div>
+    <div id=corp>
+      <img src="images/top.png" />
+      <div id="mid_corp">
+        <div class="menu_top">
+          <a href="?page=home">Accueil</a> -
+          <a href="http://forum.nestrya.fr/">Forum</a> -
+          <a href="?page=event">Events</a> -
+          <a href="?page=ladder">Classement</a> -
+          <a href="?page=staff">Équipe</a> -
+          <a href="?page=rule">Charte</a> -
+          <a href="?page=faq">FAQ</a> -
+          <a href="?page=contact">Contact</a>
+        </div>
+      </div>
+      <img style="margin-top: -5px;" src="images/bottom.png" />
+      <div id="carrousel"></div>

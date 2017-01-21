@@ -1,0 +1,1 @@
+<?php $admin->ban_ip(); ?>

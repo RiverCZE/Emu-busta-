@@ -1,0 +1,1052 @@
+<?php
+class AdminClass
+{
+
+  public function AutoBan()
+  {
+
+  }
+
+  private function admin($level=false)
+  {
+    if($level == false)
+    {
+      if(@$_SESSION['level'] > 0)
+      {
+        return TRUE;
+      }
+      else
+      {
+        return FALSE;
+      }
+    }
+    elseif(is_numeric($level))
+    {
+      if(@$_SESSION['level'] >= $level)
+      {
+        return TRUE;
+      }
+      else
+      {
+        return FALSE;
+      }
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
+
+  var $supreme_right = array('Sorrow','thediminou','Aly');
+
+  public function config()
+  {
+    global $sys;
+    if($this->admin(5) && in_array($_SESSION['account'],$this->supreme_right))
+    {
+      switch(@$_GET['action'])
+      {
+        case 'edit':
+          echo '<div id="result">';
+          $sys->dbOther->query("UPDATE config SET maintenance = '".$_POST['maintenance']."', m_raison = '".$_POST['m_raison']."', construct = '".$_POST['construct']."', c_time = '".$_POST['c_time']."', rpg_link = '".$_POST['rpg_link']."', points = '".$_POST['points']."', points_vip = '".$_POST['points_vip']."', points_vote = '".$_POST['points_vote']."', register = '".$_POST['register']."', beta = '".$_POST['beta']."'");
+          echo 'Configuration modifié - <a href="#" onClick="DevTool(\'config\');"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+        default :
+          $sql = $sys->dbOther->query("SELECT * FROM config");
+          $data = $sql->fetch(PDO::FETCH_ASSOC);
+          echo '<div id="result">
+            <form method="post" onSubmit="DevForm_Config(this.maintenance.value,this.m_raison.value,this.construct.value,this.c_time.value,this.rpg_link.value,this.points.value,this.points_vip.value,this.points_vote.value,this.register.value,this.beta.value);return false;" action="">
+              <h2>Maintenance</h2>
+              <select name="maintenance">
+                <option value="'.$data['maintenance'].'">'.($data['maintenance'] > 0 ? 'Activer' : 'Désactiver').'</option>
+                <option value="0">--------</option>
+                <option value="1" style="color:green;">Activer</option>
+                <option value="0" style="color:red;">Désactiver</option>
+              </select><br /><br />
+              <textarea name="m_raison" cols="50">'.$data['m_raison'].'</textarea>
+              <h2>Construction</h2>
+              <select name="construct">
+                <option value="'.$data['construct'].'">'.($data['construct'] > 0 ? 'Activer' : 'Désactiver').'</option>
+                <option value="0">--------</option>
+                <option value="1" style="color:green;">Activer</option>
+                <option value="0" style="color:red;">Désactiver</option>
+              </select>
+              <input type="text" name="c_time" value="'.date('Y-m-d H:i:s').'" />
+              <h2>RPG Paradize</h2>
+              <input type="text" name="rpg_link" value="'.$data['rpg_link'].'" size="5" />
+              <h2>Points</h2>
+              <input type="text" name="points" value="'.$data['points'].'" size="3" /> Points par achat</br >
+              <input type="text" name="points_vip" value="'.$data['points_vip'].'" size="3" /> Suplément pour VIP</br >
+              <input type="text" name="points_vote" value="'.$data['points_vote'].'" size="3" /> Points par vote</br ><br />
+              <h2>Inscription</h2>
+              <select name="register">
+                <option value="'.$data['register'].'">'.($data['register'] > 0 ? 'Ouvert' : 'Fermer').'</option>
+                <option value="0">--------</option>
+                <option value="1" style="color:green;">Ouvert</option>
+                <option value="0" style="color:red;">Fermer</option>
+              </select> Inscription
+             <br />
+              <select name="beta">
+                <option value="'.$data['beta'].'">'.($data['beta'] > 0 ? 'ON' : 'OFF').'</option>
+                <option value="0">--------</option>
+                <option value="1" style="color:green;">ON</option>
+                <option value="0" style="color:red;">OFF</option>
+              </select> Mode Beta (Parrainage obligatoire)
+              <br /><br />
+              <input type="submit" name="send" value="Modifier" />
+            <form>
+            </div>';
+          break;
+      }
+    }
+    else
+    {
+      echo ERROR_A01;
+    }
+  }
+  
+  public function commentaire()
+  {
+    global $sys;
+    if($this->admin(5))
+    {
+      switch(@$_GET['action'])
+      {
+        case 'delete':
+          $sys->dbOther->query("DELETE FROM commentaires WHERE id = '".$_GET['id']."'");
+          echo 'Commentaire supprimer - <a href="#" onClick="DevTool(\'commentaire\');"><img src=images/devtool/back.png /> Retour</a>';
+          break;
+        default :
+          echo '<div id="result">
+            <h2>Recherche</h2>
+            <form method="post" onsubmit="DevForm_Search(\'commentaire\',this.search.value,this.where.value);return false;" action="">
+              <input type="text" name="search" value="">
+              <select name="where">
+                <option value="author">Auteur</option>
+                <option value="content">Contenue</option>
+              </select>
+              <input type="submit" name="send" value="Rechercher" />
+            </form>
+            <h2>Résultats</h2>
+            <table border="0" width="100%">
+            <th>Auteur</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th>Supprimer</th>';
+          if(isset($_POST['search']) && $_POST['search'] != '')
+          {
+            $sql = $sys->dbOther->query("SELECT * FROM commentaires WHERE ".$_POST['where']." LIKE '%".$_POST['search']."%' ORDER BY id DESC");
+          }
+          else
+          {
+            $sql = $sys->dbOther->query("SELECT * FROM commentaires ORDER BY id DESC");
+          }
+          foreach ($sql as $data)
+          {
+            echo '<tr align="center">
+                <td>'.$data['author'].'</td>
+                <td>'.substr($data['content'],0,100).'</td>
+                <td>'.$data['date'].'</td>
+                <td><a href="#" onClick="if(confirm(\'Vous êtes sur le point de supprimer le commentaire de '.$data['author'].'\n Message : '.substr(htmlentities($data['content']),0,100).'\')) DevTool(\'commentaire&action=delete&id='.$data['id'].'\'); else return false;"><img src="images/cross.png" /></a></td>
+              </tr>';
+          }
+          echo '</table>
+            </div>';
+          break;
+      }
+    }
+    else
+    {
+      echo ERROR_A01;
+    }
+  }
+
+  public function ban_ip()
+  {
+    global $sys;
+    if($this->admin(5))
+    {
+      switch(@$_GET['action'])
+      {
+        case 'add':
+          if(isset($_POST['ip']) && $_POST['ip'] != 'IP' && $_POST['ip'] != '')
+          {
+            if($_POST['life'] == 0)
+            {
+              $sys->dbOther->query("INSERT INTO ban_ip (IP, expire, raison) VALUES ('".$_POST['ip']."','".$_POST['expire']." ".date('H:i:s')."','".$_POST['raison']."')");
+            }
+            else
+            {
+              $sys->dbOther->query("INSERT INTO ban_ip (IP, expire, raison) VALUES ('".$_POST['ip']."','0000-00-00 00:00:00','".$_POST['raison']."')");
+            }
+          }
+          echo 'IP '.$_POST['ip'].' banni - <a href="#" onClick="DevTool(\'bannissement\');return false;"><img src=images/devtool/back.png /> Retour</a>';
+          break;
+        case 'delete':
+          $sys->dbOther->query("DELETE FROM ban_ip WHERE id = '".$_GET['id']."'");
+          echo 'IP banni supprimer - <a href="#" onClick="DevTool(\'bannissement\');return false;"><img src=images/devtool/back.png /> Retour</a>';
+          break;
+        default :
+          echo '<div id="result">
+            <h2>Ajouter</h2>
+            <form method="post" onsubmit="DevForm_AddBan(this.ip.value,this.date.value,this.life.value,this.raison.value);return false;" action="">
+              <input type="text" name="ip" value="IP">
+              <input type="text" name="date" id="date" value="Expiration" />
+              <select name="life">
+                <option value="0">Date</option>
+                <option value="1">Jamais</option>
+              </select>
+              <input type="text" name="raison" value="Raison">
+              <input type="submit" name="send value="Rechercher" />
+            </form>
+            <h2>IPs Bannis</h2>
+            <table border="0" width="100%">
+              <th>IP</th>
+              <th>Date</th>
+              <th>Raison</th>
+              <th>Expire</th>
+              <th>Supprimer</th>';
+          $sql = $sys->dbOther->query("SELECT * FROM ban_ip ORDER BY id DESC");
+          foreach ($sql as $data)
+          {
+            echo '<tr align="center">
+                <td>'.$data['IP'].'</td>
+                <td>'.$data['date'].'</td>
+                <td>'.$data['raison'].'</td>
+                <td>'.$data['expire'].'</td>
+                <td><a href="#" onClick="if(confirm(\'Vous êtes sur le point de supprimer le bannisement de l`IP '.$data['IP'].'\')) DevTool(\'bannissement&action=delete&id='.$data['id'].'\'); else return false;"><img src="images/cross.png" /></a></td>
+              </tr>';
+          }
+          echo '</table>
+            <h2>Comptes Bannis</h2>
+              <table border="0" width="100%">
+              <th>Compte</th>
+              <th>Pseudo</th>
+              <th>IP</th>
+              <th>Modifier</th>';
+          $sql = $sys->dbOther->query("SELECT * FROM accounts WHERE banned = 1 ORDER BY guid DESC");
+          foreach ($sql as $data)
+          {
+            echo '<tr align="center">
+                <td>'.$data['account'].'</td>
+                <td>'.$data['pseudo'].'</td>
+                <td>'.$data['lastIP'].'</td>
+                <td><a href="#" onClick="DevTool(\'membre&action=edit&id='.$data['guid'].'\');return false;"><img src="images/devtool/write.png" /></a></td>
+              </tr>';
+          }
+          echo '</table>
+            </div>';
+          break;
+      }
+    }
+    else
+    {
+      echo ERROR_A01;
+    }
+  }
+
+  public function membre()
+  {
+    global $sys;
+    if($this->admin(5))
+    {
+      switch(@$_GET['action'])
+      {
+        case 'send':
+          echo '<div id="result">';
+          $sys->dbOther->query("UPDATE accounts SET account = '".$_POST['account']."', pseudo = '".$_POST['pseudo']."', email = '".$_POST['email']."', level = '".$_POST['level']."', vip = '".$_POST['vip']."', banned = '".$_POST['banned']."', points = '".$_POST['points']."' WHERE guid = '".$_POST['guid']."'");
+          echo 'Compte modifié - <a href="#" onClick="DevTool(\'membre&action=edit&id='.$_POST['guid'].'\');return false;"><img src=images/devtool/back.png /> Retour</a></div>';
+          break;
+        case 'edit':
+          echo '<div id="result">
+            <h2>Modification de compte</h2>';
+          $sql = $sys->dbOther->query("SELECT * FROM accounts WHERE guid = '".$_GET['id']."'");
+          $data = $sql->fetch(PDO::FETCH_ASSOC);
+          echo '<form method="post" onsubmit="DevForm_EditAcc(this.guid.value,this.account.value,this.pseudo.value,this.email.value,this.level.value,this.vip.value,this.banned.value,this.points.value);return false;" action="">
+              <table border="0">
+                <input type="hidden" name="guid" value="'.$data['guid'].'" />
+                <tr><td>Compte :</td><td><input type="text" name="account" value="'.$data['account'].'" /></td></tr>
+                <tr><td>Password :</td><td><input type="text" name="password" disabled="disabled" value="'.$data['pass'].'" /></td></tr>
+                <tr><td>Pseudo :</td><td><input type="text" name="pseudo" value="'.$data['pseudo'].'" /></td></tr>
+                <tr><td>Email :</td><td><input type="text" name="email" value="'.$data['email'].'" /></td></tr>
+                <tr><td>IP :</td><td><input type="text" name="ip" disabled="disabled" value="'.$data['lastIP'].'" /></td></tr>
+                <tr>
+                  <td>Niveau :</td>
+                  <td>
+                    <select name="level">
+                      <option value="'.$data['level'].'">'.$sys->rank_name($data['level']).'</option>
+                      <option value="0">---------------</option>
+                      <option value="0">Normal</option>
+                      <option value="1">Animateur</option>
+                      <option value="2">Maître du Jeu</option>
+                      <option value="3">Chef Maître du Jeu</option>
+                      <option value="4">Administrateur</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>VIP :</td>
+                  <td>
+                    <select name="vip">
+                      <option value="'.$data['VIP'].'">'.($data['VIP'] > 1 ? 'OUI' : 'NON').'</option>
+                      <option value="1">-----</option>
+                      <option value="2">OUI</option>
+                      <option value="1">NON</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Banni :</td>
+                  <td>
+                    <select name="banned">
+                      <option value="'.$data['banned'].'">'.($data['banned'] > 0 ? 'OUI' : 'NON').'</option>
+                      <option value="0">-----</option>
+                      <option value="1">OUI</option>
+                      <option value="0">NON</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr><td>Points :</td><td><input type="text" name="points" value="'.$data['points'].'" /></td></tr>
+                <tr><td>Votes :</td><td><input type="text" name="votes" disabled="disabled" value="'.$data['votes'].'" /></td></tr>
+                <tr><td></td><td><input type="submit" name="send" value="Modifier" /></td></tr>
+              </table>
+            <form>
+            <a href="#" onClick="DevTool(\'membre\');"><img src=images/devtool/back.png /> Retour</a>
+            <div>';
+          break;
+        default :
+          echo '<div id="result">
+            <h2>Recherche</h2>
+            <form method="post" onsubmit="DevForm_Search(\'membre\',this.search.value,this.where.value);return false" action="">
+              <input type="text" name="search" value="">
+              <select name="where">
+                <option value="account">Compte</option>
+                <option value="guid">GUID</option>
+                <option value="pseudo">Pseudo</option>
+                <option value="email">Email</option>
+                <option value="lastIP">IP</option>
+              </select>
+              <input type="submit" name="send" value="Rechercher" />
+            </form>
+            <h2>Trie</h2>
+
+            <form method="post" onsubmit="DevForm_TrieAcc(this.by.value,this.order.value,this.limit.value);return false" action="">
+              <select name="by">
+                <option value="guid">GUID</option>
+                <option value="account">Compte</option>
+                <option value="pseudo">Pseudo</option>
+                <option value="email">Email</option>
+                <option value="lastIP">IP</option>
+                <option value="VIP">VIP</option>
+                <option value="level">Niveau</option>
+                <option value="banned">Banni</option>
+                <option value="points">Points</option>
+                <option value="votes">Votes</option>
+              </select>
+              <select name="order">
+                <option value="DESC">Décroissant</option>
+                <option value="ASC">Croissant</option>
+              </select>
+              <input type="text" name="limit" value="20" size="1" />
+              <input type="submit" name="send" value="Trier" />
+            </form>
+
+            <h2>Résultats</h2>
+            <table border="0" width="100%">
+              <th>GUID</th>
+              <th>Compte</th>
+              <th>Pseudo</th>
+              <th>IP</th>
+              <th>Niveau</th>
+              <th>Modifier</th>';
+          if(isset($_POST['limit']) && $_POST['limit'] != '' && is_numeric($_POST['limit']))
+          {
+            $LIMIT = $_POST['limit'];
+             setcookie('limit', $LIMIT, time()+3600);
+          }
+          elseif(isset($_COOKIE['limit']) && $_COOKIE['limit'] != '' && is_numeric($_COOKIE['limit']))
+          {
+            $LIMIT = $_COOKIE['limit'];
+          }
+          else
+          {
+            $LIMIT = 20;
+          }
+          $sql = $sys->dbOther->query("SELECT COUNT(guid) as nbAcc FROM accounts");
+          $data = $sql->fetch(PDO::FETCH_ASSOC);
+          $nbAcc = $data['nbAcc'];
+          $nbPage = ceil($nbAcc/$LIMIT);
+          if(isset($_GET['p']) && $_GET['p'] > 0 && $_GET['p'] <= $nbPage)
+          {
+            $cPage = $_GET['p'];
+          }
+          else
+          {
+            $cPage = 1;
+          }
+          if(isset($_POST['search']) && $_POST['search'] != '')
+          {
+            $sql = $sys->dbOther->query("SELECT * FROM accounts WHERE ".$_POST['where']." LIKE '%".$_POST['search']."%' ORDER BY guid DESC LIMIT ".(($cPage-1)*$LIMIT).",".$LIMIT."");
+          }
+          else
+          {
+            if(isset($_POST['by']) && $_POST['by'] != '')
+            {
+              if(is_numeric($_POST['limit']))
+              {
+                $sql = $sys->dbOther->query("SELECT * FROM accounts ORDER BY ".$_POST['by']." ".$_POST['order']." LIMIT ".(($cPage-1)*$LIMIT).",".$LIMIT."");
+              }
+              else
+              {
+                $sql = $sys->dbOther->query("SELECT * FROM accounts ORDER BY ".$_POST['by']." ".$_POST['order']." LIMIT ".(($cPage-1)*$LIMIT).",".$LIMIT."");
+              }
+            }
+            else
+            {
+              $sql = $sys->dbOther->query("SELECT * FROM accounts ORDER BY guid DESC LIMIT ".(($cPage-1)*$LIMIT).",".$LIMIT."");
+            }
+          }
+          foreach ($sql as $data)
+          {
+            echo ''.($data['level'] > 0 ? '<tr align="center" bgcolor="#5287ff">' : '<tr align="center">').'
+                <td>'.$data['guid'].'</td>
+                '.($data['banned'] > 0 ? '<td bgcolor="#ff5252">'.$data['account'].'' : '<td>'.$data['account'].'').'</td>
+                <td>'.$data['pseudo'].'</td>
+                <td>'.$data['lastIP'].'</td>
+                <td>'.$data['level'].'</td>
+                <td><a href="#" onClick="DevTool(\'membre&action=edit&id='.$data['guid'].'\');return false;"><img src="images/devtool/write.png" /></a></td>
+              </tr>';
+          }
+          echo '</table>';
+          if(@$nbAcc > 0)
+          {
+            echo '<center>Pages : ';
+            for($i=1;$i<=$nbPage;$i++)
+            {
+              if($i==$cPage)
+              {
+                echo '<a href="#" onClick="DevTool(\'membre&p='.$i.'\');return false;"><b>'.$i.'</b></a> ';
+              }
+              else
+              {
+                echo '<a href="#" onClick="DevTool(\'membre&p='.$i.'\');return false;">'.$i.'</a> ';
+              }
+            }
+            echo '</center>';
+          }
+          echo '<div>';
+          break;
+      }
+    }
+    else
+    {
+      echo ERROR_A01;
+    }
+  }
+
+  public function news()
+  {
+    global $sys;
+    if($this->admin(5))
+    {
+      switch(@$_GET['action'])
+      {
+        case 'edit_send':
+          echo '<div id="result">';
+          $sys->dbOther->query("UPDATE news SET title = '".$_POST['title']."', content = '".$_POST['content']."', com = '".$_POST['com']."' WHERE id = '".$_POST['id']."'");
+          @unlink('../cache/page=home.html');
+          @unlink('../cache/page=home&p=1.html');
+          @unlink('../cache/page=home&p=2.html');
+          @unlink('../cache/page=home&p=3.html');
+          @unlink('../cache/.html');
+          echo 'News modifié - <a href="#" onClick="DevTool(\'news\');return false;"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+        case 'edit':
+          $sql = $sys->dbOther->query("SELECT * FROM news WHERE id = '".$_GET['id']."'");
+          $data = $sql->fetch(PDO::FETCH_ASSOC);
+          echo '<div id="result">
+            <form method="post" onsubmit="DevForm_EditNews(this.id.value,this.title.value,this.content.value,this.com.value);return false;" action="">
+              <input type="hidden" name="id" value="'.$data['id'].'" />
+              <label for="title">Titre :</label><br />
+              <input type="text" id="title" name="title" value="'.$data['title'].'" /><br /><br />
+              Message :<br />
+              <textarea name="content" cols="100" rows="20">'.$data['content'].'</textarea><br /><br />
+              Activer le commentaires :
+              <select name="com">
+                <option value="'.$data['com'].'">'.($data['com'] > 0 ? 'OUI' : 'NON').'</option>
+                <option value="1">-----</option>
+                <option value="1">OUI</option>
+                <option value="0">NON</option>
+              </select>
+              <input type="submit" name="send" value="Modifier" />
+            </form>
+            <br /><a href="#" onClick="DevTool(\'news\');return false;"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+        case 'add_send':
+          echo '<div id="result">';
+          $sys->dbOther->query("INSERT INTO news (title, content, author, com) VALUES ('".$_POST['title']."','".$_POST['content']."','".$_SESSION['account']."','".$_POST['com']."')");
+          @unlink('../cache/page=home.html');
+          @unlink('../cache/page=home&p=1.html');
+          @unlink('../cache/page=home&p=2.html');
+          @unlink('../cache/page=home&p=3.html');
+          @unlink('../cache/.html');
+          echo 'News ajouté - <a href="#" onClick="DevTool(\'news\');return false;"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+        case 'add':
+          echo '<div id="result">
+            <form method="post" onsubmit="DevForm_AddNews(this.title.value,this.content.value,this.com.value);return false;" action="">
+              <label for="title">Titre :</label><br />
+              <input type="text" id="title" name="title" value="" /><br /><br />
+              Message :<br />
+              <textarea name="content" cols="100" rows="20"></textarea><br /><br />
+              Activer le commentaires :
+              <select name="com">
+                <option value="1">OUI</option>
+                <option value="0">NON</option>
+              </select>
+              <input type="submit" name="send" value="Ajouter" />
+            </form>
+            <br /><a href="#" onClick="DevTool(\'news\');return false;"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+        case 'delete':
+          $sys->dbOther->query("DELETE FROM news WHERE id = '".$_GET['id']."'");
+          @unlink('../cache/page=home.html');
+          @unlink('../cache/page=home&p=1.html');
+          @unlink('../cache/page=home&p=2.html');
+          @unlink('../cache/page=home&p=3.html');
+          @unlink('../cache/.html');
+          echo 'News supprimé - <a href="#" onClick="DevTool(\'news\');return false;"><img src=images/devtool/back.png /> Retour</a>';
+          break;
+        default :
+          echo '<div id="result">
+            <h2>Recherche</h2>
+            <form method="post" onsubmit="DevForm_Search(\'news\',this.search.value,this.where.value);return false;" action="">
+              <input type="text" name="search" value="">
+              <select name="where">
+                <option value="content">Contenue</option>
+                <option value="aithor">Auteur</option>
+                <option value="id">ID</option>
+              </select>
+              <input type="submit" name="send" value="Rechercher" />
+            </form>
+
+            <h2>Ajouter</h2>
+            <a href="#" onClick="DevTool(\'news&action=add\');return false;">Ajouter une news</a>
+            <h2>Résultats</h2>
+            <table border="0" width="100%">
+            <th>ID</th>
+            <th>Titre</th>
+            <th>Contenue</th>
+            <th>Auteur</th>
+            <th>Date</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>';
+          if(isset($_POST['search']) && $_POST['search'] != '')
+          {
+            $sql = $sys->dbOther->query("SELECT * FROM news WHERE ".$_POST['where']." LIKE '%".$_POST['search']."%' ORDER BY id DESC");
+          }
+          else
+          {
+            $sql = $sys->dbOther->query("SELECT * FROM news ORDER BY id DESC");
+          }
+          foreach ($sql as $data)
+          {
+            echo '<tr align="center">
+                <td>'.$data['id'].'</td>
+                <td>'.$data['title'].'</td>
+                <td>'.substr($data['content'],0,80).'</td>
+                <td>'.$data['author'].'</td>
+                <td>'.$data['date'].'</td>
+                <td><a href="#" onClick="DevTool(\'news&action=edit&id='.$data['id'].'\');return false;"><img src="images/devtool/write.png" /></a></td>
+                <td><a href="#" onClick="if(confirm(\'Vous êtes sur le point de supprimer la news '.$data['id'].'\')) DevTool(\'news&action=delete&id='.$data['id'].'\'); else return false;"><img src="images/cross.png" /></a></td>
+              </tr>';
+          }
+          echo '</table>
+            </div>';
+          break;
+      }
+    }
+    else
+    {
+      echo ERROR_A01;
+    }
+  }
+
+//  public function cadeau()
+//  {
+//    global $sys;
+//    if($this->admin(5))
+//    {
+//      switch(@$_GET['action'])
+//      {
+//        case 'modifi':
+//          $sys->dbOther->query("INSERT INTO personnages WHERE id = '".$_GET['id']."'");
+//          echo 'Cadeau envoyer - <a href="#" onClick="DevTool(\'cadeau\');return false;"><img src=images/devtool/back.png /> Retour</a>';
+//          break;
+//        default :
+//          echo '<h2>Listes de cadeaux</h2>
+//
+//           * blabla item 12586 <br/>
+//           * blabla item 12585<br/>
+//           * item 12595
+//
+//           <h2>Envoie</h2>
+//
+//            <form method="post" onsubmit="DevForm_AddBan(this.ip.value,this.date.value,this.life.value,this.raison.value);return false;" action="">
+//              <center><input type="text" name="Cadeau 1" value="Cadeau 1">
+//              <input type="text" name="Cadeau 2" value="Cadeau 2">
+//              <input type="text" name="Cadeau 3" value="Cadeau 3">
+//              <input type="text" name="Cadeau 4" value="Cadeau 4">
+//              <input type="text" name="Cadeau 5" value="Cadeau 5">
+//			  <input type="submit" name="send" value="Envoyer" /></center>
+//
+//              </select>';
+//          echo '</table>';
+//          break;
+//      }
+//    }
+//    else
+//    {
+//      echo ERROR_A01;
+//    }
+//  }
+
+  public function contact()
+  {
+    global $sys;
+    if($this->admin(5))
+    {
+      switch(@$_GET['action'])
+      {
+        case 'delete':
+          echo '<div id="result">';
+          $sys->dbOther->query("DELETE FROM contact WHERE id = '".$_GET['id']."'");
+          echo 'Message suprimé <a href="#" onClick="DevTool(\'contact\');return false;"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+          break;
+        case 'view':
+          echo '<div id="result">
+            <h2>Messages</h2>';
+          $sys->dbOther->query("UPDATE contact SET state = 1 WHERE id = '".$_GET['id']."'");
+          $sql = $sys->dbOther->query("SELECT * FROM contact WHERE id = '".$_GET['id']."'");
+          $data = $sql->fetch(PDO::FETCH_ASSOC);
+          echo 'Auteur : '.($author = $sys->acc_info('guid',$data['account'],'account')).'<br />
+            Objet : '.$data['object'].'<br /><br />
+            Message :<br /><br />
+            '.$data['content'].'
+            <br /><br />
+            <a href="#" onClick="if(confirm(\'Vous êtes sur le point de supprimer le message de '.$author.'\')) DevTool(\'contact&action=delete&id='.$data['id'].'\'); else return false;"><img src=images/devtool/close.png /> Suprimer</a> - <a href="#" onClick="DevTool(\'contact\');return false;"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+        default :
+          echo '<div id="result">
+            <h2>Messages</h2>';
+          $sql = $sys->dbOther->query("SELECT COUNT(id) as nbMails FROM contact WHERE A = '0'");
+          $data = $sql->fetch(PDO::FETCH_ASSOC);
+          $nbMails = $data['nbMails'];
+          $nbPage = ceil($nbMails/10);
+          if(isset($_GET['p']) && $_GET['p'] > 0 && $_GET['p'] <= $nbPage)
+          {
+            $cPage = $_GET['p'];
+          }
+          else
+          {
+            $cPage = 1;
+          }
+
+          echo '<table border="0" width="100%">
+            <th>Etat</th>
+            <th>Objet</th>
+            <th>Contenue</th>
+            <th>Date</th>
+            <th>Lire</th>';
+
+          $sql = $sys->dbOther->query("SELECT * FROM contact WHERE A = '0' ORDER BY id DESC LIMIT ".(($cPage-1)*10).",10");
+          foreach ($sql as $data)
+          {
+            echo '<tr align="center">
+                <td>'.($data['state'] == 0 ? '<img src="images/devtool/email.png" />' : '<img src="images/devtool/email_open.png" />').'</td>
+                <td>'.$data['object'].'</td>
+                <td>'.substr($data['content'],0,80).'</td>
+                <td>'.$data['date'].'</td>
+                <td><a href="#" onClick="DevTool(\'contact&action=view&id='.$data['id'].'\');return false;"><img src="images/devtool/zoom.png" /></a></td>
+              </tr>';
+          }
+          echo '</table>';
+          if(@$nbMails > 0)
+          {
+            echo '<center>Pages : ';
+            for($i=1;$i<=$nbPage;$i++)
+            {
+              if($i==$cPage)
+              {
+                echo '<a href="#" onClick="DevTool(\'contact&p='.$i.'\');return false;"><b>'.$i.'</b></a> ';
+              }
+              else
+              {
+                echo '<a href="#" onClick="DevTool(\'contact&p='.$i.'\');return false;">'.$i.'</a> ';
+              }
+            }
+            echo '</center>';
+          }
+          echo '<h2>Messages concerné</h2>
+            <table border="0" width="100%">
+              <th>Etat</th>
+              <th>Objet</th>
+              <th>Contenue</th>
+              <th>Date</th>
+              <th>Lire</th>';
+
+          $sql = $sys->dbOther->query("SELECT * FROM contact WHERE A = '".$_SESSION['account']."' ORDER BY id DESC");
+          foreach ($sql as $data)
+          {
+            echo '<tr align="center">
+                <td>'.($data['state'] == 0 ? '<img src="images/devtool/email.png" />' : '<img src="images/devtool/email_open.png" />').'</td>
+                <td>'.$data['object'].'</td>
+                <td>'.substr($data['content'],0,80).'</td>
+                <td>'.$data['date'].'</td>
+                <td><a href="#" onClick="DevTool(\'contact&action=view&id='.$data['id'].'\');return false;"><img src="images/devtool/zoom.png" /></a></td>
+              </tr>';
+          }
+          echo '</table>
+            </div>';
+          break;
+      }
+    }
+  }
+
+  public function logs()
+  {
+    if($this->admin(5) && in_array($_SESSION['account'],$this->supreme_right))
+    {
+      echo 'Hello';
+    }
+    else
+    {
+      echo ERROR_A01;
+    }
+  }
+
+  public function infos()
+  {
+    global $sys;
+    if($this->admin(5) && in_array($_SESSION['account'],$this->supreme_right))
+    {
+      echo '<div id="result">
+        <h2>Starpass</h2>'.
+        ($sys->idp == 15104 ? '<b><font color="green">Code IDP Correct : '.$sys->idp.'</font></b>' : '<img src="images/devtool/error.png" /> <span style="text-decoration: blink;"><b><font color="red">Code IDP Incorrect : '.$sys->idp.' (Default : 15104)</font></b></span> <img src="images/devtool/error.png" />').'<br />'.
+        ($sys->idd == 32002 ? '<b><font color="green">Code IDD Correct : '.$sys->idd.'</font></b>' : '<img src="images/devtool/error.png" /> <span style="text-decoration: blink;"><b><font color="red">Code IDD Incorrect : '.$sys->idd.' (Default : 32002)</font></b></span> <img src="images/devtool/error.png" />').'<br /><br />
+        <h2>RPG Paradize</h2>'.
+        ($sys->vote_link == 21633 ? '<b><font color="green">ID RPG Paradize Correct : '.$sys->vote_link.'</font></b>' : '<img src="images/devtool/error.png" /> <span style="text-decoration: blink;"><b><font color="red">ID RPG Paradize Incorrect : '.$sys->vote_link.' (Default : 21633)</font></b></span> <img src="images/devtool/error.png" />').'
+        </div>';
+    }
+    else
+    {
+      echo ERROR_A01;
+    }
+  }
+
+  public function achat()
+  {
+    global $sys;
+    if($this->admin(5))
+    {
+      switch(@$_GET['action'])
+      {
+//        case 'delete':
+//          echo '<div id="result">';
+//          echo '</div>';
+//          break;
+//          break;
+//        case 'view':
+//          echo '<div id="result">
+//            <h2>Messages</h2>';
+//          $sys->dbOther->query("UPDATE contact SET state = 1 WHERE id = '".$_GET['id']."'");
+//          $sql = $sys->dbOther->query("SELECT * FROM contact WHERE id = '".$_GET['id']."'");
+//          $data = $sql->fetch(PDO::FETCH_ASSOC);
+//          echo 'Auteur : '.($author = $sys->acc_info('guid',$data['account'],'account')).'<br />
+//            Objet : '.$data['object'].'<br /><br />
+//            Message :<br /><br />
+//            '.$data['content'].'
+//            <br /><br />
+//            <a href="#" onClick="if(confirm(\'Vous êtes sur le point de supprimer le message de '.$author.'\')) DevTool(\'contact&action=delete&id='.$data['id'].'\'); else return false;"><img src=images/devtool/close.png /> Suprimer</a> - <a href="#" onClick="DevTool(\'contact\');return false;"><img src=images/devtool/back.png /> Retour</a>
+//            </div>';
+//          break;
+        default :
+          echo '<div id="result">
+            <h2>Achats Points</h2>';
+          $sql = $sys->dbOther->query("SELECT COUNT(id) as nbCode FROM points_historique");
+          $data = $sql->fetch(PDO::FETCH_ASSOC);
+          $nbCode = $data['nbCode'];
+          $nbPage = ceil($nbCode/10);
+          if(isset($_GET['p']) && $_GET['p'] > 0 && $_GET['p'] <= $nbPage)
+          {
+            $cPage = $_GET['p'];
+          }
+          else
+          {
+            $cPage = 1;
+          }
+
+          echo '<table border="0" width="100%">
+            <th>Compte</th>
+            <th>Code</th>
+            <th>Points</th>
+            <th>Type</th>
+            <th>Pays</th>
+            <th>Palier</th>
+            <th>ID Palier</th>
+            <th>Date</th>';
+
+          $sql = $sys->dbOther->query("SELECT * FROM points_historique ORDER BY id DESC LIMIT ".(($cPage-1)*10).",10");
+          foreach ($sql as $data)
+          {
+            echo '<tr align="center">
+                <td>'.($author = $sys->acc_info('guid',$data['account'],'account')).'</td>
+                <td>'.$data['code'].'</td>
+                <td>'.$data['points'].'</td>
+                <td>'.$data['type'].'</td>
+                <td>'.$data['pays'].'</td>
+                <td>'.$data['palier'].'</td>
+                <td>'.$data['id_palier'].'</td>
+                <td>'.$data['date'].'</td>
+              </tr>';
+          }
+          echo '</table>';
+          if(@$nbCode > 0)
+          {
+            echo '<center>Pages : ';
+            for($i=1;$i<=$nbPage;$i++)
+            {
+              if($i==$cPage)
+              {
+                echo '<a href="#" onClick="DevTool(\'achat&p='.$i.'\');return false;"><b>'.$i.'</b></a> ';
+              }
+              else
+              {
+                echo '<a href="#" onClick="DevTool(\'achat&p='.$i.'\');return false;">'.$i.'</a> ';
+              }
+            }
+            echo '</center>';
+          }
+          echo '</div>';
+          break;
+      }
+    }
+  }
+
+  public function key()
+  {
+    global $sys;
+    if($this->admin(5))
+    {
+      echo '<div id="result">
+        <h2>50 Clés Beta Test</h2>';
+      if(isset($_GET['pack']) && $_GET['pack'] == '1')
+      {
+        for($i=1;$i<=50;$i++)
+        {
+          $cle = substr(strtoupper(md5(base64_encode(crypt($_SESSION['guid'],md5(date('s')))))),0,10);
+          $sys->dbOther->query("INSERT INTO parrain (account,cle) VALUES ('0','".$cle."')");
+          echo 'Key N°'.$i.' : '.$cle.' générer<br />';
+          @$end .= 'http://www.nestrya.fr/?page=register&key='.$cle.'<br />';
+          time_nanosleep(2,0);
+        }
+        echo '<br /><br />'.$end.'';
+      }
+      echo '<br />
+        <input type="submit" value="Générer (2 Minutes !)" onClick="DevTool(\'key&pack=1\');return false;" />
+        <h2>1 Clé Beta Test</h2>';
+      if(isset($_GET['one']) && $_GET['one'] == '1')
+      {
+        $cle = substr(strtoupper(md5(base64_encode(crypt($_SESSION['guid'],md5(date('s')))))),0,10);
+        $sys->dbOther->query("INSERT INTO parrain (account,cle) VALUES ('0','".$cle."')");
+        echo 'Key : '.$cle.' générer<br />';
+        echo 'http://www.nestrya.fr/?page=register&key='.$cle.'<br />';
+      }
+      echo '<br />
+        <input type="submit" value="Générer" onClick="DevTool(\'key&one=1\');return false;" />';
+      echo '</div>';
+    }
+  }
+
+  public function boutique()
+  {
+    global $sys;
+    if($this->admin(5))
+    {
+      switch(@$_GET['action'])
+      {
+        case 'edit_send':
+          echo '<div id="result">';
+//          desc = '".htmlentities($_POST['desc'])."'
+          $sys->dbOther->query("UPDATE shop_list SET item = '".$_POST['item']."', name = '".$_POST['name']."', type = '".$_POST['type']."', level = '".$_POST['level']."', icon = '".$_POST['picture']."', picture = '".$_POST['picture']."', effets = '".$_POST['effets']."', condi = '".$_POST['condi']."', price = '".$_POST['price']."', quant = '".$_POST['quant']."', reduc = '".$_POST['reduc']."' WHERE id = '".$_POST['id']."'");
+          @unlink('../cache/page=shop&category='.$_POST['type'].'.html');
+          @unlink('../cache/page=shop&category=details&id='.$_POST['id'].'.html');
+          echo 'Objet modifié - <a href="#" onClick="DevTool(\'boutique\');return false;"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+        case 'edit':
+          $sql = $sys->dbOther->query("SELECT * FROM shop_list WHERE id = '".$_GET['id']."'");
+          $data = $sql->fetch(PDO::FETCH_ASSOC);
+          echo '<div id="result">
+            <form method="post" onsubmit="DevForm_EditShop(this.id.value,this.name.value,this.type.value,this.item.value,this.level.value,this.picture.value,this.effets.value,this.condi.value,this.desc.value,this.quant.value,this.price.value,this.reduc.value);return false;" action="">
+              <input type="hidden" name="id" value="'.$data['id'].'" />
+              Nom : <input type="text" name="name" value="'.$data['name'].'" /><br />
+              Type :
+              <select name="type">
+                <option value="'.$data['type'].'">'.$data['type'].'</option>
+                <option value="'.$data['type'].'">----------</option>
+                <option value="coiffe">Coiffe</option>
+                <option value="cape">Cape</option>
+                <option value="amulette">Amulette</option>
+                <option value="anneau">Anneau</option>
+                <option value="ceinture">Ceinture</option>
+                <option value="botte">Bottes</option>
+                <option value="bouclier">Bouclier</option>
+                <option value="familier">Familier</option>
+                <option value="diver">Diver</option>
+                <option value="epee">Epée</option>
+                <option value="baton">Baton</option>
+                <option value="arc">Arc</option>
+                <option value="baguette">Baguette</option>
+                <option value="dague">Dagues</option>
+                <option value="marteau">Marteau</option>
+                <option value="pelle">Pelle</option>
+                <option value="hache">Hache</option>
+              </select><br />
+              Item ID : <input type="text" name="item" value="'.$data['item'].'" size="3" /><br />
+              Niveau : <input type="text" name="level" value="'.$data['level'].'" size="1" /><br />
+              Image : <input type="text" name="picture" value="'.$data['picture'].'" /><br />
+              Effets :<br /><textarea name="effets">'.$data['effets'].'</textarea><br />
+              Condition :<br /><textarea name="condi">'.html_entity_decode($data['condi']).'</textarea><br />
+              Description :<br /><textarea name="desc">'.html_entity_decode($data['desc']).'</textarea><br />
+              Quantité : <input type="text" name="quant" value="'.$data['quant'].'" size="1" /><br />
+              Prix : <input type="text" name="price" value="'.$data['price'].'" size="1" /><br />
+              Réduction : -<input type="text" name="reduc" value="'.$data['reduc'].'" size="1" />%<br />
+              <br /><input type="submit" name="send" value="Modifier" />
+            </form>
+            <br /><a href="#" onClick="DevTool(\'boutique\');return false;"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+        case 'add_send':
+          echo '<div id="result">';
+          $sys->dbOther->query("INSERT INTO shop_list (item, name, type, level, icon, picture, effets, condi, price, quant, reduc) VALUES ('".$_POST['item']."','".$_POST['name']."','".$_POST['type']."','".$_POST['level']."','".$_POST['picture']."','".$_POST['picture']."','".$_POST['effets']."','".$_POST['condi']."','".$_POST['price']."','".$_POST['quant']."','".$_POST['reduc']."')");
+          @unlink('../cache/page=shop&category='.$_POST['type'].'.html');
+          echo 'Objet ajouté - <a href="#" onClick="DevTool(\'boutique\');return false;"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+        case 'add':
+          echo '<div id="result">
+            <form method="post" onsubmit="DevForm_AddShop(this.name.value,this.type.value,this.item.value,this.level.value,this.picture.value,this.effets.value,this.condi.value,this.desc.value,this.quant.value,this.price.value,this.reduc.value);return false;" action="">
+              Nom : <input type="text" name="name" value="" /><br />
+              Type :
+              <select name="type">
+                <option value=""></option>
+                <option value="coiffe">Coiffe</option>
+                <option value="cape">Cape</option>
+                <option value="amulette">Amulette</option>
+                <option value="anneau">Anneau</option>
+                <option value="ceinture">Ceinture</option>
+                <option value="botte">Bottes</option>
+                <option value="bouclier">Bouclier</option>
+                <option value="familier">Familier</option>
+                <option value="diver">Diver</option>
+                <option value="epee">Epée</option>
+                <option value="baton">Baton</option>
+                <option value="arc">Arc</option>
+                <option value="baguette">Baguette</option>
+                <option value="dague">Dagues</option>
+                <option value="marteau">Marteau</option>
+                <option value="pelle">Pelle</option>
+                <option value="hache">Hache</option>
+              </select><br />
+              Item ID : <input type="text" name="item" value="" size="3" /><br />
+              Niveau : <input type="text" name="level" value="" size="1" /><br />
+              Image : <input type="text" name="picture" value="" /><br />
+              Effets :<br /><textarea name="effets"></textarea><br />
+              Condition :<br /><textarea name="condi"></textarea><br />
+              Description :<br /><textarea name="desc"></textarea><br />
+              Quantité : <input type="text" name="quant" value="" size="1" /><br />
+              Prix : <input type="text" name="price" value="" size="1" /><br />
+              Réduction : -<input type="text" name="reduc" value="" size="1" />%<br />
+              <br /><input type="submit" name="send" value="Ajouter" />
+            </form>
+            <br /><a href="#" onClick="DevTool(\'boutique\');return false;"><img src=images/devtool/back.png /> Retour</a>
+            </div>';
+          break;
+        case 'delete':
+          $sys->dbOther->query("DELETE FROM news WHERE id = '".$_GET['id']."'");
+          @unlink('../cache/page=home.html');
+          @unlink('../cache/page=home&p=1.html');
+          @unlink('../cache/page=home&p=2.html');
+          @unlink('../cache/page=home&p=3.html');
+          @unlink('../cache/.html');
+          echo 'News supprimé - <a href="#" onClick="DevTool(\'news\');return false;"><img src=images/devtool/back.png /> Retour</a>';
+          break;
+        default :
+          echo '<div id="result">
+            <h2>Recherche</h2>
+            <form method="post" onsubmit="DevForm_Search(\'boutique\',this.search.value,this.where.value);return false;" action="">
+              <input type="text" name="search" value="">
+              <select name="where">
+                <option value="name">Nom</option>
+                <option value="type">Type</option>
+                <option value="id">ID</option>
+              </select>
+              <input type="submit" name="send" value="Rechercher" />
+            </form>
+
+            <h2>Ajouter</h2>
+            <a href="#" onClick="DevTool(\'boutique&action=add\');return false;">Ajouter un objet</a>
+            <h2>Résultats</h2>
+            <table border="0" width="100%">
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Item</th>
+            <th>Type</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Reduction (VIP)</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>';
+          if(isset($_POST['search']) && $_POST['search'] != '')
+          {
+            $sql = $sys->dbOther->query("SELECT * FROM shop_list WHERE ".$_POST['where']." LIKE '%".$_POST['search']."%' ORDER BY id DESC");
+          }
+          else
+          {
+            $sql = $sys->dbOther->query("SELECT * FROM shop_list ORDER BY id DESC");
+          }
+          foreach ($sql as $data)
+          {
+            echo '<tr align="center">
+                <td>'.$data['id'].'</td>
+                <td>'.$data['name'].'</td>
+                <td>'.$data['item'].'</td>
+                <td>'.$data['type'].'</td>
+                <td>'.$data['price'].'</td>
+                <td>'.$data['quant'].'</td>
+                <td>-'.$data['reduc'].'%</td>
+                <td><a href="#" onClick="DevTool(\'boutique&action=edit&id='.$data['id'].'\');return false;"><img src="images/devtool/write.png" /></a></td>
+                <td><a href="#" onClick="if(confirm(\'Vous êtes sur le point de supprimer l`objet : '.$data['name'].'\')) DevTool(\'boutique&action=delete&id='.$data['id'].'\'); else return false;"><img src="images/cross.png" /></a></td>
+              </tr>';
+          }
+          echo '</table>
+            </div>';
+          break;
+      }
+    }
+    else
+    {
+      echo ERROR_A01;
+    }
+  }
+
+}

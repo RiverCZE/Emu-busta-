@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 24
+/svn/!svn/ver/170/config
+END
+admin.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/191/config/admin.class.php
+END
+systeme.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/191/config/systeme.class.php
+END
+configuration.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/189/config/configuration.inc.php
+END
+msg_list.php
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/189/config/msg_list.php
+END
+bbcode.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/53/config/bbcode.class.php
+END
+captcha.php
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/1/config/captcha.php
+END
+index.php
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/181/config/index.php
+END

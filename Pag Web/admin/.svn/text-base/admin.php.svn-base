@@ -1,0 +1,28 @@
+<?php
+session_start();
+
+require_once '../config/configuration.inc.php';
+require_once( '../config/admin.class' . PHP );
+$admin = new AdminClass;
+
+$page = htmlentities(@$_GET['page']);
+
+
+if(!($sys->ban_ip()))
+{
+  if(isset($page) && $page != '')
+  {
+    if(file_exists($page . PHP))
+    {
+      include_once $page . PHP;
+    }
+    else
+    {
+      include_once '404' . PHP;
+    }
+  }
+}
+else
+{
+  include_once 'ban' . PHP;
+}

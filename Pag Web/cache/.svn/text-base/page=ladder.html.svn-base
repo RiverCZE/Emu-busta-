@@ -1,0 +1,146 @@
+<input type="hidden" value="johnny - 90.16.182.162" />    <img src="images/top.png" />
+      <div id="mid_corp">
+        <div id="text_corp">
+          <span class="cambria orange italic size25">Classement</span>
+      <br /><br />
+      <div id="item_tooltip_top"></div>
+      <div id="item_tooltip_middle">
+      <div align="center">
+      <table border="0" width="95%">
+      <th>Position</th>
+      <th>Nom</th>
+      <th>Classe</th>
+      <th>Sexe</th>
+      <th>Niveau</th>
+      <th>Alignement</th><tr class="Ladder1" align="center">
+          <td><img src="images/icons/ladder1.png" /></td>
+          <td><a href=""><font color="black">linvocatrice</font></a></td>
+          <td><img src="images/icons/class_2.png" title="Osamodas" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_1.png" title="Femelle" /></td>
+          <td>200</td>
+          <td><img src="images/icons/align_3.png" title="Mercenaire" width="22" height="22" /></td>
+        <tr><tr class="Ladder2" align="center">
+          <td><img src="images/icons/ladder2.png" /></td>
+          <td><a href=""><font color="black">Broly</font></a></td>
+          <td><img src="images/icons/class_8.png" title="Iop" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>200</td>
+          <td><img src="images/icons/align_2.png" title="Démon" width="22" height="22" /></td>
+        <tr><tr class="Ladder3" align="center">
+          <td><img src="images/icons/ladder3.png" /></td>
+          <td><a href=""><font color="black">shaman-protector</font></a></td>
+          <td><img src="images/icons/class_1.png" title="Féca" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>200</td>
+          <td><img src="images/icons/align_3.png" title="Mercenaire" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>4</td>
+          <td><a href="">Maximilien</a></td>
+          <td><img src="images/icons/class_8.png" title="Iop" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>200</td>
+          <td><img src="images/icons/align_3.png" title="Mercenaire" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>5</td>
+          <td><a href="">Black-Pearl</a></td>
+          <td><img src="images/icons/class_5.png" title="Xélor" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>200</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>6</td>
+          <td><a href="">NoXii</a></td>
+          <td><img src="images/icons/class_8.png" title="Iop" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>200</td>
+          <td><img src="images/icons/align_1.png" title="Ange" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>7</td>
+          <td><a href="">Le-Mouleuxdufm</a></td>
+          <td><img src="images/icons/class_6.png" title="Ecaflip" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_1.png" title="Femelle" /></td>
+          <td>200</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>8</td>
+          <td><a href="">Black-Pearll</a></td>
+          <td><img src="images/icons/class_3.png" title="Enutrof" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>200</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>9</td>
+          <td><a href="">Ryka</a></td>
+          <td><img src="images/icons/class_6.png" title="Ecaflip" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_1.png" title="Femelle" /></td>
+          <td>200</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>10</td>
+          <td><a href="">flash</a></td>
+          <td><img src="images/icons/class_3.png" title="Enutrof" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_1.png" title="Femelle" /></td>
+          <td>200</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>11</td>
+          <td><a href="">Milosadi</a></td>
+          <td><img src="images/icons/class_10.png" title="Sadida" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_1.png" title="Femelle" /></td>
+          <td>40</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>12</td>
+          <td><a href="">Kitah</a></td>
+          <td><img src="images/icons/class_7.png" title="Eniripsa" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_1.png" title="Femelle" /></td>
+          <td>40</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>13</td>
+          <td><a href="">Milos</a></td>
+          <td><img src="images/icons/class_11.png" title="Sacrieur" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>40</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>14</td>
+          <td><a href="">Milerius</a></td>
+          <td><img src="images/icons/class_5.png" title="Xélor" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>40</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>15</td>
+          <td><a href="">Xelostar</a></td>
+          <td><img src="images/icons/class_5.png" title="Xélor" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>40</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>16</td>
+          <td><a href="">Redemption</a></td>
+          <td><img src="images/icons/class_4.png" title="Sram" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>40</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>17</td>
+          <td><a href="">Fragon-Feu</a></td>
+          <td><img src="images/icons/class_9.png" title="Crâ" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_1.png" title="Femelle" /></td>
+          <td>40</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr><tr align="center">
+          <td>18</td>
+          <td><a href="">Akaachi</a></td>
+          <td><img src="images/icons/class_12.png" title="Pandawa" width="22" height="22" /></td>
+          <td><img src="images/icons/sexe_0.png" title="Male" /></td>
+          <td>40</td>
+          <td><img src="images/icons/align_0.png" title="Neutre" width="22" height="22" /></td>
+        <tr></table>
+      </div>
+      </div>
+      <div id="item_tooltip_bottom"></div>        </div>
+      </div>
+      <img src="images/bottom.png" />

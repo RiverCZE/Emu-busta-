@@ -1,0 +1,34 @@
+<?php
+session_start();
+
+function nombre($n)
+{
+//    return str_pad(mt_rand(0,pow(10,$n)-1),$n,'0',STR_PAD_LEFT);
+    return substr(strtoupper(sha1(time())),0,6);
+}
+
+function image($mot)
+{
+    $largeur = strlen($mot) * 10;
+    $hauteur = 20;
+    $img = imagecreate($largeur, $hauteur);
+    $blanc = imagecolorallocate($img, 39, 32, 25);
+    $noir = imagecolorallocate($img, 80, 64, 47);
+    $milieuHauteur = ($hauteur / 2) - 3;
+    imagestring($img, 6, strlen($mot) /2 , $milieuHauteur, $mot, $noir);
+//    imagerectangle($img, -1, 1, $largeur - 1, $hauteur - 1, $noir); // La bordure
+    imagepng($img);
+    imagedestroy($img);
+}
+
+
+function captcha()
+{
+    $mot = nombre(5);
+    $_SESSION['captcha'] = $mot;
+    image($mot);
+}
+
+header("Content-type: image/png");
+captcha();
+?>
